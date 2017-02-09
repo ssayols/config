@@ -19,7 +19,9 @@ set hlsearch		"Highlight the last searched pattern
 set incsearch		"Show where the next pattern is as you type it
 set number			"mostrar numero de linia
 "set relativenumber	"linia actual=linia 1
-set ttymouse=xterm2	"mouse integration under GNU Screen
+if !has('nvim')
+    set ttymouse=xterm2	"mouse integration under GNU Screen
+endif
 set wildmode=longest,list,full  "defineix com es completen els noms d'arxiu
 set wildmenu
 
@@ -27,7 +29,7 @@ set wildmenu
 if &term =~ "xterm" || &term =~ "256" || $DISPLAY != "" || $HAS_256_COLORS == "yes"
     set t_Co=256	" Force 256 colors
 endif
-colorscheme desert
+colorscheme monokai
 set cursorline
 hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE
 hi ColorColumn ctermbg=234 guibg=#2c2d27
