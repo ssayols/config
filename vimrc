@@ -64,6 +64,14 @@ vmap <Up> k
 nmap <tab> :
 vmap <tab> :
 
+"remaps especifics pel mode terminal de neovim
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
+tnoremap <C-w>h <C-\><C-n><C-w>h
+tnoremap <C-w>j <C-\><C-n><C-w>j
+tnoremap <C-w>k <C-\><C-n><C-w>k
+tnoremap <C-w>l <C-\><C-n><C-w>l
+
 "latex
 let g:tex_flavor='latex'
 let g:Tex_MultipleCompileFormats='pdf'
