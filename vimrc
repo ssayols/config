@@ -13,17 +13,20 @@ set expandtab		"tractar tab com espais
 set smarttab		"make tab insert indents instead of tabs at the beginning of a line
 
 "altres
+set laststatus=0    "hide status line in the bottom
 set ignorecase		"cerques no case sensitive
 set smartcase		"case sensittive si el terme de cerca inclou alguna majuscula
 set hlsearch		"Highlight the last searched pattern
 set incsearch		"Show where the next pattern is as you type it
 set number			"mostrar numero de linia
 "set relativenumber	"linia actual=linia 1
-if !has('nvim')
-    set ttymouse=xterm2	"mouse integration under GNU Screen
-endif
 set wildmode=longest,list,full  "defineix com es completen els noms d'arxiu
 set wildmenu
+if !has('nvim')
+    set ttymouse=xterm2	"mouse integration under GNU Screen
+else
+    set mouse=""
+endif
 
 "colors (set color scheme, highlight current line, highlight columns 80 and 120)
 if &term =~ "xterm" || &term =~ "256" || $DISPLAY != "" || $HAS_256_COLORS == "yes"
@@ -76,7 +79,9 @@ set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
 "rplugin
-let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
+if !has('nvim')
+    let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
+endif
 let vimrplugin_show_args = 1
 vmap <Space> <Plug>REDSendSelection
 nmap <Space> <Plug>RDSendLine
@@ -93,6 +98,16 @@ autocmd FileType clojure vmap <Space> <localleader>d<CR>j
 autocmd FileType clojure vmap <S-Space> <localleader>d<CR>
 autocmd FileType clojure nmap <Space> <localleader>d<CR>j
 autocmd FileType clojure nmap <S-Space> <localleader>d<CR>
+
+" screen plugin
+"noremap <localleader>s :ScreenShell<CR>
+"noremap <localleader>q :ScreenQuit<CR>
+"noremap <localleader>d :call g:ScreenShellSend(getline("."))
+"noremap <localleader>d :ScreenSend
+"map <Space> <localleader>d<CR>j
+"map <S-Space> <localleader>d<CR>
+"map <Space> <localleader>d<CR>j
+"map <S-Space> <localleader>d<CR>
 
 "gvim
 if has('gui_running')
