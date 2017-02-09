@@ -1,0 +1,49 @@
+##
+## fitxer de configuracio d'screen: equival a comandes ^a:
+##
+termcapinfo xterm|xterms|xs|rxvt ti@:te@
+defscrollback 10000	## scrollback 10000 lines
+autodetach on		## detach on hangup
+vbell off			## fora visual bell (mal d'ulls)
+startup_message off	## don't display the copyright pagef
+pow_detach_msg "Screen session of $LOGNAME $:cr:$:nl:ended."	## emulate .logout message
+#mousetrack on       ## select focus window with mouse
+layout save default
+
+## status bar
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%u%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %= %{mk}%H [%l]%{ck}%M %d, %c"
+#caption always "%u%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %= %{mk}host:%H Load:%l %{ck}%M%{wk} %{ck}%d %{gk}%c"
+#caption always "%{wk}[F2-Nou F3-Sortir F4-Dividir F5-Copy F6-Paste F7-Seguent F8-Anterior F9-Detach F12-Llista]     %{mk}[Load:%l %{ck}%M%{wk} %{ck}%d %{gk}%c]"
+
+## bindkeys:
+##     -register: definir funcio com a secuencia de tecles
+##     -bindkey : associar a k1-10 una comanda screen o una funcio definida
+##                les bindkeys rares (C-x M-y S-z) es poden veure fent un 'cat > /dev/null'
+register a ^aa # enviar C-a en una sessio d'screen aniuada
+register t ^aKy^aX # kill (matar el que corre a l'split) & remove (tancar l'split)
+register v ^a| # split vertical
+bindkey ^[a process a  # M-a enviar C-a a una finestra aniuada
+bindkey ^[= resize +1 # M-=, pel teclat america
+bindkey ^[- resize -1 # M--
+# F1 | 'help' in gnome-terminal
+bindkey -k k2 screen # F2 | crear una shell nova (split new)
+bindkey -k k3 process t # F3 | tancar shell
+bindkey -k k4 split # F4 | split
+bindkey ^[O1;5S process v # C-F4 | split vertical
+bindkey -k k5 copy  # F5 | copy/scrollback mode
+bindkey -k k6 paste . # F6 | paste des del buffer per defecte
+bindkey -k k7 focus up # F7 | split de dalt
+bindkey -k k8 focus down # F8 | split de baix
+bindkey ^[[1;3A focus up # M-up | split de dalt
+bindkey ^[[1;3B focus down # M-down | split de baix
+bindkey ^[[1;3C focus right # M-right | split de dalt
+bindkey ^[[1;3D focus left # M-left | split de baix
+bindkey ^[k focus up # M-up | split de dalt
+bindkey ^[j focus down # M-down | split de baix
+bindkey ^[l focus right # M-right | split de dalt
+bindkey ^[h focus left # M-left | split de baix
+bindkey -k k9 detach # F9 | split vertical
+# F11 | 'fullscreen' in gnome-terminal
+bindkey -k F2 windowlist # F12 | mostrar llista de finestres
