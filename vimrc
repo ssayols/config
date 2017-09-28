@@ -34,7 +34,7 @@ if &term =~ "xterm" || &term =~ "256" || $DISPLAY != "" || $HAS_256_COLORS == "y
 endif
 colorscheme monokai
 set cursorline
-hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE
+hi CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
 hi ColorColumn ctermbg=234 guibg=#2c2d27
 let &colorcolumn="80,".join(range(120,999),",")
 
@@ -68,6 +68,7 @@ vmap <tab> :
 if has('nvim')
     autocmd BufWinEnter,WinEnter term://* startinsert
     autocmd BufLeave term://* stopinsert
+    tnoremap <Esc> <C-\><C-n>
     tnoremap <C-w>h <C-\><C-n><C-w>h
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
@@ -88,38 +89,36 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
-"rplugin
-if !has('nvim')
-    let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
-endif
-let vimrplugin_show_args = 1
-vmap <Space> <Plug>REDSendSelection
-nmap <Space> <Plug>RDSendLine
+"pretend we have a very simple screen plugin
+"slimmed down from https://github.com/jalvesaq/vimcmdline
+function! OpenTerm(app)
+    set switchbuf=useopen
+    silent belowright new
+    let g:cmdline_job = termopen(a:app)
+    let g:cmdline_termbuf = bufname("%")
+    exe "sbuffer " . bufname("%")
+endfun
 
-"screen plugin for clojure filetypes (ftdetect/clojure.vim sets the filetype)
-"caveats: 'send a line' in normal mode has to get into insert mode first. It's
-"a bug in lein repl and readline. In visual mode I couldn't work out how to
-"fix it yet...
-autocmd FileType clojure noremap <localleader>s :ScreenShell<CR>
-autocmd FileType clojure noremap <localleader>q :ScreenQuit<CR>
-autocmd FileType clojure noremap <localleader>d :call g:ScreenShellSend('i' . getline("."))
-autocmd FileType clojure vnoremap <localleader>d :ScreenSend
-autocmd FileType clojure vmap <Space> <localleader>d<CR>j
-autocmd FileType clojure vmap <S-Space> <localleader>d<CR>
-autocmd FileType clojure nmap <Space> <localleader>d<CR>j
-autocmd FileType clojure nmap <S-Space> <localleader>d<CR>
+function! SendLine(line)
+    call jobsend(g:cmdline_job, a:line . "\n")
+endfun
 
-" screen plugin
-"noremap <localleader>s :ScreenShell<CR>
-"noremap <localleader>q :ScreenQuit<CR>
-"noremap <localleader>d :call g:ScreenShellSend(getline("."))
-"noremap <localleader>d :ScreenSend
-"map <Space> <localleader>d<CR>j
-"map <S-Space> <localleader>d<CR>
-"map <Space> <localleader>d<CR>j
-"map <S-Space> <localleader>d<CR>
+nmap <localleader>s :call OpenTerm("bash")<CR>
+nmap <Space> :call SendLine(getline("."))<CR>j
+vmap <Space> :call SendLine(getline("."))<CR>j
 
-"gvim
+"R bindings
+function! R_bindings()
+    if !has('nvim')
+        let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
+    endif
+    let vimrplugin_show_args = 1
+    vmap <Space> <Plug>REDSendSelection
+    nmap <Space> <Plug>RDSendLine
+endfun
+autocmd FileType R call R_bindings()
+
+"set GUI specific options
 if has('gui_running')
 	set lines=35 columns=132
 end
