@@ -108,8 +108,8 @@ function! SendLineZz(line)
 endfun
 
 nmap <localleader>s :call OpenTermZz("bash")<CR>
-"nmap <Space> :call SendLineZz(getline("."))<CR>j
-"vmap <Space> :call SendLineZz(getline("."))<CR>j
+nmap <Space> :call SendLineZz(getline("."))<CR>j
+vmap <Space> :call SendLineZz(getline("."))<CR>j
 
 "R bindings. Got from the nvim-R defaults (:map)
 function! R_bindings()
