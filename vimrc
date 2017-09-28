@@ -91,32 +91,37 @@ set foldlevel=1         "this is just what i use
 
 "pretend we have a very simple screen plugin
 "slimmed down from https://github.com/jalvesaq/vimcmdline
-function! OpenTerm(app)
+function! OpenTermZz(app)
     set switchbuf=useopen
     silent belowright new
-    let g:cmdline_job = termopen(a:app)
-    let g:cmdline_termbuf = bufname("%")
+    let g:opentermzz_job = termopen(a:app)
+    let g:opentermzz_termbuf = bufname("%")
     exe "sbuffer " . bufname("%")
 endfun
 
-function! SendLine(line)
-    call jobsend(g:cmdline_job, a:line . "\n")
+function! SendLineZz(line)
+    if exists('g:opentermzz_job')
+        call jobsend(g:opentermzz_job, a:line . "\n")
+    else
+        echo "terminal not open, open split first"
+    endif
 endfun
 
-nmap <localleader>s :call OpenTerm("bash")<CR>
-nmap <Space> :call SendLine(getline("."))<CR>j
-vmap <Space> :call SendLine(getline("."))<CR>j
+nmap <localleader>s :call OpenTermZz("bash")<CR>
+"nmap <Space> :call SendLineZz(getline("."))<CR>j
+"vmap <Space> :call SendLineZz(getline("."))<CR>j
 
-"R bindings
+"R bindings. Got from the nvim-R defaults (:map)
 function! R_bindings()
     if !has('nvim')
         let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
     endif
     let vimrplugin_show_args = 1
-    vmap <Space> <Plug>REDSendSelection
-    nmap <Space> <Plug>RDSendLine
+    vnoremap <Space> <Esc>:call SendSelectionToR("echo", "stay")<CR>j
+    nnoremap <Space> :call SendLineToR("stay")<CR>j
 endfun
-autocmd FileType R call R_bindings()
+
+autocmd FileType r call R_bindings()
 
 "set GUI specific options
 if has('gui_running')
