@@ -117,8 +117,8 @@ function! R_bindings()
         let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
     endif
     let vimrplugin_show_args = 1
-    vnoremap <Space> <Esc>:call SendSelectionToR("echo", "stay")<CR>j
-    nnoremap <Space> :call SendLineToR("stay")<CR>j
+    vmap <Space> <Esc>:call SendSelectionToR("echo", "down")<CR>
+    nmap <Space> :call SendLineToR("down")<CR>0
 endfun
 
 autocmd FileType r call R_bindings()
