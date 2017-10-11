@@ -52,7 +52,7 @@ nnoremap <C-F> <C-F>zz
 vnoremap <C-F> <C-F>zz
 nnoremap <C-B> <C-B>zz
 vnoremap <C-B> <C-B>zz
-inoremap kj <esc>
+inoremap kj <Esc>
 nnoremap j gj
 vnoremap j gj
 nnoremap k gk
@@ -68,7 +68,7 @@ vmap <tab> :
 if has('nvim')
     autocmd BufWinEnter,WinEnter term://* startinsert
     autocmd BufLeave term://* stopinsert
-    tnoremap <Esc> <C-\><C-n>
+"    tnoremap <Esc> <C-\><C-n>  <-- interferes with readline's set -o vi
     tnoremap <C-w>h <C-\><C-n><C-w>h
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
