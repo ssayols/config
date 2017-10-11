@@ -118,6 +118,8 @@ function! R_bindings()
     endif
     let vimrplugin_show_args = 1
     let R_nvimpager = "tab"
+    let R_esc_term = 0
+    let R_assign_map = "<M-,>"
     vmap <Space> <Esc>:call SendSelectionToR("echo", "down")<CR>
     nmap <Space> :call SendLineToR("down")<CR>0
 endfun
