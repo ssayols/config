@@ -117,6 +117,7 @@ function! R_bindings()
         let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
     endif
     let vimrplugin_show_args = 1
+    let R_nvimpager = "tab"
     vmap <Space> <Esc>:call SendSelectionToR("echo", "down")<CR>
     nmap <Space> :call SendLineToR("down")<CR>0
 endfun
