@@ -125,6 +125,7 @@ function! R_bindings()
 endfun
 
 autocmd FileType r call R_bindings()
+autocmd FileType rmd call R_bindings()
 
 "set GUI specific options
 if has('gui_running')
