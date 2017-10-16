@@ -6,16 +6,16 @@ filetype plugin on
 filetype indent on
 
 "control de tabulacio
-set tabstop=4		"visualment, mostrar un tab com 4 espais
-set softtabstop=4	"en mode insert, un tab equival a 4 espais
-set shiftwidth=4	" >> o << equivalen a 4 espais
+set tabstop=2		"visualment, mostrar un tab com 4 espais
+set softtabstop=2	"en mode insert, un tab equival a 4 espais
+set shiftwidth=2	" >> o << equivalen a 4 espais
 set expandtab		"tractar tab com espais
 set smarttab		"make tab insert indents instead of tabs at the beginning of a line
 
 "altres
 set laststatus=0    "hide status line in the bottom
 set ignorecase		"cerques no case sensitive
-set smartcase		"case sensittive si el terme de cerca inclou alguna majuscula
+set smartcase		"case sensitive si el terme de cerca inclou alguna majuscula
 set hlsearch		"Highlight the last searched pattern
 set incsearch		"Show where the next pattern is as you type it
 set number			"mostrar numero de linia
@@ -64,15 +64,27 @@ vmap <Up> k
 nmap <tab> :
 vmap <tab> :
 
+"remaps per moure's per finestres
+noremap <A-h> <C-\><C-n><C-w>h
+noremap <A-j> <C-\><C-n><C-w>j
+noremap <A-k> <C-\><C-n><C-w>k
+noremap <A-l> <C-\><C-n><C-w>l
+
 "remaps especifics pel mode terminal de neovim
 if has('nvim')
     autocmd BufWinEnter,WinEnter term://* startinsert
     autocmd BufLeave term://* stopinsert
 "    tnoremap <Esc> <C-\><C-n>  <-- interferes with readline's set -o vi
+    " simular a mode terminal els maps que tenim en mode normal per moure's
+    " per finestres
     tnoremap <C-w>h <C-\><C-n><C-w>h
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
     tnoremap <C-w>l <C-\><C-n><C-w>l
+    tnoremap <A-h> <C-\><C-n><C-w>h
+    tnoremap <A-j> <C-\><C-n><C-w>j
+    tnoremap <A-k> <C-\><C-n><C-w>k
+    tnoremap <A-l> <C-\><C-n><C-w>l
 endif
 
 "latex
