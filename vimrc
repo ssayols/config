@@ -65,10 +65,14 @@ nmap <tab> :
 vmap <tab> :
 
 "remaps per moure's per finestres
-noremap <A-h> <C-\><C-n><C-w>h
-noremap <A-j> <C-\><C-n><C-w>j
-noremap <A-k> <C-\><C-n><C-w>k
-noremap <A-l> <C-\><C-n><C-w>l
+noremap <A-h> <C-w>h
+noremap <A-j> <C-w>j
+noremap <A-k> <C-w>k
+noremap <A-l> <C-w>l
+inoremap <A-h> <Esc><C-w>h
+inoremap <A-j> <Esc><C-w>j
+inoremap <A-k> <Esc><C-w>k
+inoremap <A-l> <Esc><C-w>l
 
 "remaps especifics pel mode terminal de neovim
 if has('nvim')
