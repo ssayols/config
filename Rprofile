@@ -5,7 +5,7 @@ options(max.print=1000)
 options(menu.graphics=FALSE)
 options(editor="vim")
 options(Ncpus=getOption("Ncpus", parallel::detectCores()) # used in, at least, ?install.packages
-options(mc.cores=getOption("mc.cores", parallel::detectCores()),
+options(mc.cores=getOption("mc.cores", parallel::detectCores())
 options(prompt="R> ")
 options("repos"=c("CRAN"="http://cran.rstudio.org/"))
 
