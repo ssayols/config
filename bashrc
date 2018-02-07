@@ -57,7 +57,17 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+  function smile_prompt
+  {
+    if [ "$?" -eq "0" ]; then
+      SC="\[\033[32m\]:)"
+    else
+      SC="\[\033[31m\]:("
+    fi
+    PS1="\[\033[33m\]\u@\h \[\033[34m\]$PWD\[\033[00m\]\n$SC\[\033[00m\] "
+  }
+  PROMPT_COMMAND=smile_prompt
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W\$ '
 fi
