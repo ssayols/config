@@ -35,6 +35,7 @@ endif
 colorscheme monokai
 set cursorline
 hi CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+hi visual ctermfg=NONE ctermbg=245
 hi ColorColumn ctermbg=234 guibg=#2c2d27
 let &colorcolumn="80,".join(range(120,999),",")
 
