@@ -144,3 +144,25 @@ fi
 
 # set editor to vim
 export EDITOR=vim
+
+# reattach to screen, and set some variables inside the session
+rescreen ()
+{
+  # check there's only 1 session available if no session was specified
+  opensessions=$(screen -ls | grep -c Detached)
+  if [ -z "$1" -a $opensessions -gt 1 ]; then
+    screen -ls
+    return 1
+  fi
+
+  # set the variable inside of the screen session
+  if [ $1 ]; then
+    SESSION="-S $1"
+  fi
+  screen $SESSION -X setenv DISPLAY $DISPLAY;
+
+  # reconnect to the screen session (if $1 is not specified, connects to the only one)
+  if [ $? -eq 0 ]; then
+    screen -r $1
+  fi
+}
