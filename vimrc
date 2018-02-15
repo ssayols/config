@@ -149,3 +149,9 @@ if has('gui_running')
 	set lines=35 columns=132
 end
 
+"automatically open the quickfix window after grep
+augroup myvimrc
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l*    lwindow
+augroup END
