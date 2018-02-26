@@ -163,6 +163,6 @@ rescreen ()
 
   # reconnect to the screen session (if $1 is not specified, connects to the only one)
   if [ $? -eq 0 ]; then
-    screen -r $1
+    screen -D -r $1
   fi
 }
