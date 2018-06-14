@@ -13,7 +13,7 @@ set expandtab		"tractar tab com espais
 set smarttab		"make tab insert indents instead of tabs at the beginning of a line
 
 "altres
-set laststatus=0    "hide status line in the bottom
+set laststatus=0        "hide status line in the bottom
 set ignorecase		"cerques no case sensitive
 set smartcase		"case sensitive si el terme de cerca inclou alguna majuscula
 set hlsearch		"Highlight the last searched pattern
