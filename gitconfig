@@ -1,0 +1,15 @@
+[user]
+        name = Sergi Sayols
+        email = sergisayolspuig@gmail.com
+[core]
+        editor = vim
+        askpass =
+[color]
+        ui = true
+[alias]
+        # https://coderwall.com/p/euwpig/a-better-git-log
+        lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[http]
+        sslVerify = false
+[push]
+        default = simple
