@@ -77,6 +77,7 @@ inoremap <A-l> <Esc><C-w>l
 
 "remaps especifics pel mode terminal de neovim
 if has('nvim')
+    autocmd TermOpen * setlocal nonumber norelativenumber
     autocmd BufWinEnter,WinEnter term://* startinsert
     autocmd BufLeave term://* stopinsert
 "    tnoremap <Esc> <C-\><C-n>  <-- interferes with readline's set -o vi
