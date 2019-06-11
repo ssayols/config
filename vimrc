@@ -156,3 +156,12 @@ augroup myvimrc
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
 augroup END
+
+"vimwiki
+let wiki = {}
+let wiki.path = '~/Dropbox/vimwiki/'
+let wiki.syntax = 'markdown'
+let wiki.ext = '.md'
+let wiki.index = 'main'
+
+let g:vimwiki_list = [wiki]
