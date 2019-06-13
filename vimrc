@@ -13,7 +13,7 @@ set expandtab		"tractar tab com espais
 set smarttab		"make tab insert indents instead of tabs at the beginning of a line
 
 "altres
-set laststatus=0        "hide status line in the bottom
+set laststatus=0    "hide status line in the bottom
 set ignorecase		"cerques no case sensitive
 set smartcase		"case sensitive si el terme de cerca inclou alguna majuscula
 set hlsearch		"Highlight the last searched pattern
@@ -30,7 +30,7 @@ endif
 
 "colors (set color scheme, highlight current line, highlight columns 80 and 120)
 if &term =~ "xterm" || &term =~ "256" || $DISPLAY != "" || $HAS_256_COLORS == "yes"
-    set t_Co=256	" Force 256 colors
+  set t_Co=256	" Force 256 colors
 endif
 colorscheme monokai
 set cursorline
@@ -77,20 +77,19 @@ inoremap <A-l> <Esc><C-w>l
 
 "remaps especifics pel mode terminal de neovim
 if has('nvim')
-    autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd BufWinEnter,WinEnter term://* startinsert
-    autocmd BufLeave term://* stopinsert
-"    tnoremap <Esc> <C-\><C-n>  <-- interferes with readline's set -o vi
-    " simular a mode terminal els maps que tenim en mode normal per moure's
-    " per finestres
-    tnoremap <C-w>h <C-\><C-n><C-w>h
-    tnoremap <C-w>j <C-\><C-n><C-w>j
-    tnoremap <C-w>k <C-\><C-n><C-w>k
-    tnoremap <C-w>l <C-\><C-n><C-w>l
-    tnoremap <A-h> <C-\><C-n><C-w>h
-    tnoremap <A-j> <C-\><C-n><C-w>j
-    tnoremap <A-k> <C-\><C-n><C-w>k
-    tnoremap <A-l> <C-\><C-n><C-w>l
+  autocmd BufWinEnter,WinEnter term://* startinsert
+  autocmd BufLeave term://* stopinsert
+  autocmd TermOpen * setlocal nonumber norelativenumber
+"  tnoremap <Esc> <C-\><C-n>  <-- interferes with readline's set -o vi
+  tnoremap kj <C-\><C-n>
+  tnoremap <C-w>h <C-\><C-n><C-w>h
+  tnoremap <C-w>j <C-\><C-n><C-w>j
+  tnoremap <C-w>k <C-\><C-n><C-w>k
+  tnoremap <C-w>l <C-\><C-n><C-w>l
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
 endif
 
 "latex
@@ -110,19 +109,19 @@ set foldlevel=1         "this is just what i use
 "pretend we have a very simple screen plugin
 "slimmed down from https://github.com/jalvesaq/vimcmdline
 function! OpenTermZz(app)
-    set switchbuf=useopen
-    silent belowright new
-    let g:opentermzz_job = termopen(a:app)
-    let g:opentermzz_termbuf = bufname("%")
-    exe "sbuffer " . bufname("%")
+  set switchbuf=useopen
+  silent belowright new
+  let g:opentermzz_job = termopen(a:app)
+  let g:opentermzz_termbuf = bufname("%")
+  exe "sbuffer " . bufname("%")
 endfun
 
 function! SendLineZz(line)
-    if exists('g:opentermzz_job')
-        call jobsend(g:opentermzz_job, a:line . "\n")
-    else
-        echo "terminal not open, open split first"
-    endif
+  if exists('g:opentermzz_job')
+    call jobsend(g:opentermzz_job, a:line . "\n")
+  else
+    echo "terminal not open, open split first"
+  endif
 endfun
 
 nmap <localleader>s :call OpenTermZz("bash")<CR>
@@ -131,15 +130,21 @@ vmap <Space> :call SendLineZz(getline("."))<CR>j
 
 "R bindings. Got from the nvim-R defaults (:map)
 function! R_bindings()
-    if !has('nvim')
-        let vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
-    endif
-    let vimrplugin_show_args = 1
-    let R_nvimpager = "tab"
-    let R_esc_term = 0
-    let R_assign_map = "<M-,>"
-    vmap <Space> <Esc>:call SendSelectionToR("echo", "down")<CR>
-    nmap <Space> :call SendLineToR("down")<CR>0
+  " change the behavior the the plugin by setting some globals from ~/.config/nvim/R/common_global.vim
+  if !has('nvim')
+    let g:vimrplugin_source = "~/.vim/r-plugin/screenR.vim"
+  endif
+  let g:vimrplugin_show_args = 1
+  let g:R_nvimpager = "tab"
+  let g:R_esc_term = 0
+  " this 2 for some reason seem to be used before set here and need to be
+  " changed in common_global.vim directly (or better unmaps + mapped again)
+  let g:R_assign = 1
+  let g:R_assign_map = "<M-,>"
+  iunmap <buffer> _
+  call RCreateEditMaps()
+  vmap <Space> <Esc>:call SendSelectionToR("echo", "down")<CR>
+  nmap <Space> :call SendLineToR("down")<CR>0
 endfun
 
 autocmd FileType r call R_bindings()
