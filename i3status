@@ -11,42 +11,40 @@ general {
 order += "load"
 order += "cpu_temperature 0"
 order += "disk /"
-order += "disk /home"
-order += "ethernet enp2s0"
-order += "wireless wlo1"
+order += "ethernet enp0s31f6"
+order += "wireless wlp1s0"
 order += "volume master"
 order += "battery 1"
 order += "tztime local"
 
+# unicode icons taken from http://xahlee.info/comp/unicode_index.html
+# enter 2-byte unicode characters with C-V u <4-digit hex code>
+# enter 4-byte unicode characters with C-V U <8-digit hex code>
 load {
-        format = "<span background='#f59335'> ⛰ %5min Load </span>"
+        format = "<span background='#f59335'> 📈%5min Load </span>"
 }
 
 cpu_temperature 0 {
-        format = "<span background='#bf616a'> %degrees °C </span>"
+        format = "<span background='#bf616a'> 🌡 %degrees °C </span>"
         path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 disk "/" {
-        format = "<span background='#fec7cd'> %free Free </span>"
+        format = "<span background='#fec7cd'> 💾%free Free </span>"
 }
 
-disk "/home" {
-        format = "<span background='#a1d569'> %free Free </span>"
+ethernet enp0s31f6 {
+        format_up = "<span background='#88c0d0'> ⚡%ip </span>"
+        format_down = "<span background='#88c0d0'> Ethernet disconnected </span>"
 }
 
-ethernet enp2s0 {
-        format_up = "<span background='#88c0d0'> ⚡ %ip </span>"
-        format_down = "<span background='#88c0d0'> Disconnected </span>"
-}
-
-wireless wlo1 {
-        format_up = "<span background='#b48ead'> ⚡ %essid </span>"
-        format_down = "<span background='#b48ead'> Disconnected </span>"
+wireless wlp1s0 {
+        format_up = "<span background='#b48ead'> ⚡%essid (%ip) </span>"
+        format_down = "<span background='#b48ead'> Wireless disconnected </span>"
 }
 
 volume master {
-        format = "<span background='#ebcb8b'> ☊ %volume </span>"
+        format = "<span background='#ebcb8b'> 🎧%volume </span>"
         format_muted = "<span background='#ebcb8b'> Muted </span>"
         device = "default"
         mixer = "Master"
@@ -55,7 +53,7 @@ volume master {
 
 battery 1 {
 	last_full_capacity = true
-  format = "<span background='#a3be8c'> ⛽%status %percentage </span>"
+  format = "<span background='#a3be8c'> 🔋%status %percentage </span>"
   format_down = "No Battery"
   status_chr = "Charging"
   status_bat = "Battery"
@@ -67,6 +65,6 @@ battery 1 {
 
 tztime local {
 		format = "<span background='#81a1c1'> %time </span>"
-		format_time = "⌚ %a %-d %b %H:%M"
+		format_time = "⌚%a %-d %b %H:%M"
 }
 
