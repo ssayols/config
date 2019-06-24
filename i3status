@@ -21,7 +21,7 @@ order += "tztime local"
 # enter 2-byte unicode characters with C-V u <4-digit hex code>
 # enter 4-byte unicode characters with C-V U <8-digit hex code>
 load {
-        format = "<span background='#f59335'> 📈%5min Load </span>"
+        format = "<span background='#f59335'> 📈%1min Load </span>"
 }
 
 # check `cat /sys/class/thermal/thermal_zone*/type` for the right `x86_pkg_temp` temperature sensor
