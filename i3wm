@@ -9,8 +9,8 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-#set $mod Mod1
 set $mod Mod4
+set $mod2 Mod1
 
 ##
 ## Startup programs and keybindings
@@ -22,25 +22,29 @@ exec --no-startup-id xmodmap ~/.config/i3/mapEscToCaps
 exec --no-startup-id ~/.config/i3/screenlayout.sh
 # set the background picture
 #exec --no-startup-id feh --bg-center ~/Pictures/pa-amb-tomaquet.png
-# disable touchpad when typing
-exec syndaemon -i 1 -K -d &
-# run network-manager
+# disable touchpad when typing (only works with synaptic touchpads)
+#exec syndaemon -i 1 -K -d &
+#
+# open applets: network-manager, volume, redshift
 exec nm-applet &
-# gnome settings
-#exec gnome-settings-daemon &
+exec volumeicon &
+exec redshift-gtk &
+
 # open ranger or nautilus with a shortcut
 bindsym $mod+n exec gnome-terminal --title="ranger" -x ranger
 bindsym $mod+e exec "nautilus --no-desktop&"
 for_window [class="Nautilus"] floating enable
 for_window [class="Gnome-calculator"] floating enable
-# run redshift to dim screen based on time
-exec redshift-gtk &
-# take screenshot
+
+# take screenshot (full desktop, current window, selection (current it DOES NOT WORK))
 bindsym Print exec scrot -e 'mv $f ~/Pictures'
-# take screenshot of the current window with Shift+Print
 bindsym Shift+Print exec scrot -ue 'mv $f ~/Pictures'
-# take screenshot of the selection: NOTE currently it doesn't work
-bindsym $mod+Shift+Print exec scrot -se 'mv $f ~/Pictures'
+#bindsym $mod+Shift+Print exec scrot -se 'mv $f ~/Pictures'
+
+# control audio keys
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 
 # system menu
 set $mode_system System (l)ock, (L)ogout, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
