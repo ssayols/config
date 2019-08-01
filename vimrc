@@ -1,3 +1,9 @@
+"autoreload this file when saved
+augroup vimrc
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc | echom "Reloaded .vimrc"
+augroup END
+
 "opcions per editar codi font (identacio automatica, syntax highlighting...)
 set nocompatible
 set autoindent
@@ -6,31 +12,30 @@ filetype plugin on
 filetype indent on
 
 "control de tabulacio
-set tabstop=2		"visualment, mostrar un tab com 4 espais
-set softtabstop=2	"en mode insert, un tab equival a 4 espais
-set shiftwidth=2	" >> o << equivalen a 4 espais
-set expandtab		"tractar tab com espais
-set smarttab		"make tab insert indents instead of tabs at the beginning of a line
+set tabstop=2       "visualment, mostrar un tab com 4 espais
+set softtabstop=2   "en mode insert, un tab equival a 4 espais
+set shiftwidth=2    " >> o << equivalen a 4 espais
+set expandtab       "tractar tab com espais
+set smarttab        "make tab insert indents instead of tabs at the beginning of a line
 
 "altres
-set laststatus=0    "hide status line in the bottom
-set ignorecase		"cerques no case sensitive
-set smartcase		"case sensitive si el terme de cerca inclou alguna majuscula
-set hlsearch		"Highlight the last searched pattern
-set incsearch		"Show where the next pattern is as you type it
-set number			"mostrar numero de linia
-"set relativenumber	"linia actual=linia 1
+set ignorecase    "cerques no case sensitive
+set smartcase     "case sensitive si el terme de cerca inclou alguna majuscula
+set hlsearch      "Highlight the last searched pattern
+set incsearch     "Show where the next pattern is as you type it
+set number        "mostrar numero de linia
+"set relativenumber    "linia actual=linia 1
 set wildmode=longest,list,full  "defineix com es completen els noms d'arxiu
 set wildmenu
 if !has('nvim')
-    set ttymouse=xterm2	"mouse integration under GNU Screen
+    set ttymouse=xterm2    "mouse integration under GNU Screen
 else
     set mouse=""
 endif
 
 "colors (set color scheme, highlight current line, highlight columns 80 and 120)
 if &term =~ "xterm" || &term =~ "256" || $DISPLAY != "" || $HAS_256_COLORS == "yes"
-  set t_Co=256	" Force 256 colors
+  set t_Co=256    " Force 256 colors
 endif
 colorscheme monokai
 set cursorline
@@ -39,7 +44,7 @@ hi visual ctermfg=NONE ctermbg=245
 hi ColorColumn ctermbg=234 guibg=#2c2d27
 let &colorcolumn="80,".join(range(120,999),",")
 
-"let maplocalleader ='º'	"tecla per executar comandes custom NOMES TECLAT SPANISH
+"let maplocalleader ='º'    "tecla per executar comandes custom NOMES TECLAT SPANISH
 
 "uns quants maps interessants
 nnoremap gf <C-W>gf
@@ -152,11 +157,11 @@ autocmd FileType rmd call R_bindings()
 
 "set GUI specific options
 if has('gui_running')
-	set lines=35 columns=132
+    set lines=35 columns=132
 end
 
 "automatically open the quickfix window after grep
-augroup myvimrc
+augroup quickfixwindow
   autocmd!
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
@@ -170,3 +175,24 @@ let wiki.ext = '.md'
 let wiki.index = 'main'
 
 let g:vimwiki_list = [wiki]
+
+"statusline plugin (https://github.com/itchyny/lightline.vim)
+set noshowmode    "INSERT mode is already displayed in this status bar
+"statusline: call the name() function from the gitbranch plugin (https://github.com/itchyny/vim-gitbranch) to get the current git branch
+let g:lightline = {
+  \ 'colorscheme': 'powerline',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'gitbranch#name'
+  \ },
+  \ }
+
+"nerdtree plugin (https://github.com/scrooloose/nerdtree)
+"open NERDTree
+map <C-o> :NERDTreeToggle<CR>
+"close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
