@@ -71,14 +71,14 @@ nmap <tab> :
 vmap <tab> :
 
 "remaps per moure's per finestres
-noremap <A-h> <C-w>h
-noremap <A-j> <C-w>j
-noremap <A-k> <C-w>k
-noremap <A-l> <C-w>l
-inoremap <A-h> <Esc><C-w>h
-inoremap <A-j> <Esc><C-w>j
-inoremap <A-k> <Esc><C-w>k
-inoremap <A-l> <Esc><C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+inoremap <C-h> <Esc><C-w>h
+inoremap <C-j> <Esc><C-w>j
+inoremap <C-k> <Esc><C-w>k
+inoremap <C-l> <Esc><C-w>l
 
 "remaps especifics pel mode terminal de neovim
 if has('nvim')
@@ -91,10 +91,10 @@ if has('nvim')
   tnoremap <C-w>j <C-\><C-n><C-w>j
   tnoremap <C-w>k <C-\><C-n><C-w>k
   tnoremap <C-w>l <C-\><C-n><C-w>l
-  tnoremap <A-h> <C-\><C-n><C-w>h
-  tnoremap <A-j> <C-\><C-n><C-w>j
-  tnoremap <A-k> <C-\><C-n><C-w>k
-  tnoremap <A-l> <C-\><C-n><C-w>l
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
 endif
 
 "latex
