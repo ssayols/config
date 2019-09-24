@@ -28,10 +28,11 @@ exec --no-startup-id xsetroot -solid "#000000"
 # disable touchpad when typing (only works with synaptic touchpads)
 #exec syndaemon -i 1 -K -d &
 #
-# open applets: network-manager, volume, redshift
+# open applets: network-manager, volume, redshift, gnome clipboard manager
 exec nm-applet &
 exec volumeicon &
 exec redshift-gtk &
+exec gpaste-client &
 
 # open ranger or nautilus with a shortcut
 bindsym $mod+n exec gnome-terminal --title="ranger" -x ranger
