@@ -80,6 +80,20 @@ inoremap <C-j> <Esc><C-w>j
 inoremap <C-k> <Esc><C-w>k
 inoremap <C-l> <Esc><C-w>l
 
+"remaps per moure's per tabs i buffers
+nnoremap <M-C-h> gT
+inoremap <M-C-h> gT
+vnoremap <M-C-h> gT
+nnoremap <M-C-l> gt
+inoremap <M-C-l> gt
+vnoremap <M-C-l> gt
+nnoremap <M-C-k> :bp<CR>
+inoremap <M-C-k> :bp<CR>
+vnoremap <M-C-k> :bp<CR>
+nnoremap <M-C-j> :bn<CR>
+inoremap <M-C-j> :bn<CR>
+vnoremap <M-C-j> :bn<CR>
+
 "remaps especifics pel mode terminal de neovim
 if has('nvim')
   autocmd BufWinEnter,WinEnter term://* startinsert
