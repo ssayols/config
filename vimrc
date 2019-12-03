@@ -82,17 +82,13 @@ inoremap <C-l> <Esc><C-w>l
 
 "remaps per moure's per tabs i buffers
 nnoremap <M-C-h> gT
-inoremap <M-C-h> gT
-vnoremap <M-C-h> gT
+inoremap <M-C-h> <Esc>gT
 nnoremap <M-C-l> gt
-inoremap <M-C-l> gt
-vnoremap <M-C-l> gt
+inoremap <M-C-l> <Esc>gt
 nnoremap <M-C-k> :bp<CR>
-inoremap <M-C-k> :bp<CR>
-vnoremap <M-C-k> :bp<CR>
+inoremap <M-C-k> <Esc>:bp<CR>
 nnoremap <M-C-j> :bn<CR>
-inoremap <M-C-j> :bn<CR>
-vnoremap <M-C-j> :bn<CR>
+inoremap <M-C-j> <Esc>:bn<CR>
 
 "remaps especifics pel mode terminal de neovim
 if has('nvim')
