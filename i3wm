@@ -69,15 +69,15 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 set $mode_system System (l)ock, (L)ogout, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
 mode "$mode_system" {
   bindsym l exec --no-startup-id ~/.config/i3/screenlock
-	bindsym Shift+l exec "i3-msg exit"
-	bindsym s exec --no-startup-id i3lock -c 111111 && systemctl suspend -i
-	bindsym h exec --no-startup-id i3lock -c 111111 && systemctl hibernate -i
-	bindsym r exec --no-startup-id systemctl reboot
-	bindsym Shift+s exec --no-startup-id systemctl poweroff
+  bindsym Shift+l exec "i3-msg exit"
+  bindsym s exec --no-startup-id i3lock -c 111111 && systemctl suspend -i; mode "default"
+  bindsym h exec --no-startup-id i3lock -c 111111 && systemctl hibernate -i; mode "default"
+  bindsym r exec --no-startup-id systemctl reboot
+  bindsym Shift+s exec --no-startup-id systemctl poweroff
 
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 bindsym $mod+Shift+e mode "$mode_system"
 
