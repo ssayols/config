@@ -18,6 +18,7 @@ if(interactive()) {
   options(width=132)                # wide display with multiple monitors
   options(editor="vim")
   options(prompt="R> ")
+  options(continue="  ")
 
   # colorize R output with the colorout package
   if(grepl("256color", Sys.getenv("TERM")) && require(colorout)) {
