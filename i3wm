@@ -42,9 +42,9 @@ for_window [class="Nautilus"] floating enable
 for_window [class="Gnome-calculator"] floating enable
 
 # take screenshot (full desktop, current window, selection (current it DOES NOT WORK))
-bindsym Print exec scrot -e 'mv $f ~/Pictures'
-bindsym Shift+Print exec scrot -ue 'mv $f ~/Pictures'
-#bindsym $mod+Shift+Print exec scrot -se 'mv $f ~/Pictures'
+bindsym --release Print exec scrot -e 'mv $f ~/Pictures'
+bindsym --release Shift+Print exec scrot -ue 'mv $f ~/Pictures'
+bindsym --release $mod+Print exec scrot -se 'mv $f ~/Pictures'
 
 # control audio keys (with alsa or pulseaudio <-- the latter preferred)
 #bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
