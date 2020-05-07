@@ -83,3 +83,9 @@ function IMBC_NODE {
 }
 
 alias imbc_node=IMBC_NODE
+
+function PDF2PNG {
+  gs -dNOPAUSE -dBATCH -sDEVICE=png16m -sOutputFile="${1%.pdf}-%d.png" $1
+}
+alias pdf2png=PDF2PNG
+
