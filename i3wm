@@ -81,6 +81,11 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 # set esc to caps again
 bindsym --release $mod+Escape exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
 
+# enable/disable screens
+bindsym --release $mod+F1 exec --no-startup-id "for display in $(xrandr |grep -e '\bconnected\b' | cut -f1 -d ' ' | grep -v eDP1); do xrandr --output $display --off; done"
+bindsym --release $mod+F2 exec --no-startup-id "xrandr --output DP2-1 --primary --mode 3440x1440 --refresh 100 --pos 0x0 --rotate normal --output eDP1 --off"
+bindsym --release $mod+F3 exec --no-startup-id "xrandr --output DP1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output eDP1 --mode 1920x1080 --pos 1920x0 --rotate normal"
+
 # system menu
 set $mode_system System (l)ock, (L)ogout, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
 mode "$mode_system" {
