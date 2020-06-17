@@ -37,6 +37,10 @@ exec --no-startup-id gpaste-client
 # exchange Esc-Caps keys
 exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
 
+# open Neovim with a shortcut
+bindsym $mod+Shift+Return exec xterm -title "Neovim - i3" -geometry 80x24 -fa 'Monospace' -fs 11 -e nvim
+for_window [title="Neovim - i3" class="XTerm"] floating enable
+
 # open ranger or nautilus with a shortcut
 bindsym $mod+n exec gnome-terminal --title="ranger" -x ranger
 bindsym $mod+e exec "nautilus --no-desktop&"
@@ -82,7 +86,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 bindsym --release $mod+Escape exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
 
 # enable/disable screens
-bindsym --release $mod+F1 exec --no-startup-id "for display in $(xrandr |grep -e '\bconnected\b' | cut -f1 -d ' ' | grep -v eDP1); do xrandr --output $display --off; done"
+bindsym --release $mod+F1 exec --no-startup-id "for display in $(xrandr |grep -e '\bconnected\b' | cut -f1 -d ' ' | grep -v eDP1); do xrandr --output $display --off; done; xrandr --output eDP1 --auto"
 bindsym --release $mod+F2 exec --no-startup-id "xrandr --output DP2-1 --primary --mode 3440x1440 --refresh 100 --pos 0x0 --rotate normal --output eDP1 --off"
 bindsym --release $mod+F3 exec --no-startup-id "xrandr --output DP1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output eDP1 --mode 1920x1080 --pos 1920x0 --rotate normal"
 
