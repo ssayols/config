@@ -100,7 +100,7 @@ function HPC_NODE {
   done
   shift $((OPTIND-1))
 
-  srun --pty --wallclock=$wallclock --partition=$partition --ntasks=$threads --nodes=1 --mem=$mem -J ${jobname} bash
+  srun --pty --time=$wallclock --partition=$partition --ntasks=$threads --nodes=1 --mem=$mem -J ${jobname} bash
 }
 
 alias hpc_node=HPC_NODE
