@@ -164,3 +164,14 @@ EOF
 }
 
 alias sbatch_header=SBATCH_HEADER
+
+# DF manipulation
+function PDF2PNG {
+  gs -dNOPAUSE -dBATCH -sDEVICE=pngalpha -r144 -sOutputFile="${1%.pdf}-%d.png" $1
+}
+alias pdf2png=PDF2PNG
+
+function MERGEPDF {
+  gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=out.pdf $@
+}
+alias mergepdf=MERGEPDF
