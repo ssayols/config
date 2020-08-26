@@ -10,7 +10,14 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $mod2 Mod1
+#set $mod2 Mod5 
+# Mod5 is AltGr, after assigning it with this xmodmap script:
+#     clear mod1
+#     clear mod5
+#     keycode 0x6c = ISO_Level3_Shift NoSymbol ISO_Level3_Shift  NoSymbol
+#     add Mod1 = Alt_L Meta_L
+#     add Mod5 = ISO_Level3_Shift
+#  0x6c is Alt_R. Keycodes can be retrieved with `xev`
 
 ##
 ## Startup programs and keybindings
@@ -84,7 +91,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # set esc to caps again
-bindsym --release $mod+Escape exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
+bindsym --release Mod1+Escape exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
 
 # enable/disable screens
 bindsym --release $mod+F1 exec --no-startup-id "for display in $(xrandr |grep -e '\bconnected\b' | cut -f1 -d ' ' | grep -v eDP1); do xrandr --output $display --off; done; xrandr --output eDP1 --auto"
