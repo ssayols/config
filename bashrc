@@ -51,7 +51,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # protect from myself!
-alias rm='rm -I'
+alias rm='rm -I --one-file-system'
 
 # Change the TERM environment variable (to get 256 colors)
 if [ "x$DISPLAY" != "x" ]; then
