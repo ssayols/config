@@ -4,6 +4,7 @@ options(max.print=1000)
 options(menu.graphics=FALSE)
 options(Ncpus=min(parallel::detectCores(), getOption("Ncpus", 4L)))
 options(mc.cores=min(parallel::detectCores(), getOption("Ncpus", 4L)))
+palette("Classic Tableau")  # show palette colors with scales::show_col(palette())
 
 # change repos (add BioC + non-secure server for Germany)
 source("http://bioconductor.org/biocLite.R")
