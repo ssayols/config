@@ -4,7 +4,6 @@ options(max.print=1000)
 options(menu.graphics=FALSE)
 options(Ncpus=min(parallel::detectCores(), getOption("Ncpus", 4L)))
 options(mc.cores=min(parallel::detectCores(), getOption("Ncpus", 4L)))
-palette("Classic Tableau")  # show palette colors with scales::show_col(palette())
 
 # change repos (add BioC + non-secure server for Germany)
 source("http://bioconductor.org/biocLite.R")
@@ -27,5 +26,8 @@ if(interactive()) {
                        error=c(1, 0, 1), warn=c(1, 0, 100), verbose=FALSE)
   }
   # instead of the normal cairo device, for faster plotting over the network
-  if(require(grDevices)) X11.options("type"="nbcairo")
+  if(require(grDevices)) {
+    X11.options("type"="nbcairo")
+    palette("Classic Tableau")  # show palette colors with scales::show_col(palette())
+  }
 }
