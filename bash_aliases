@@ -104,15 +104,18 @@ alias hpc_node=HPC_NODE
 # Write an sbatch header
 function SBATCH_HEADER {
 
-  local OPTIND opt wallclock partition threads mem jobname
+  local OPTIND opt wallclock partition threads mem output jobname errmsg
 
   wallclock=1:00:00
   partition=bcflong
   threads=4
   mem=1G
+  output=slurm_job.out
   jobname=bash
+  
+  errmsg="Call with: sbatch_header [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-o slurm_job.out] [-j bash]"
 
-  while getopts ":w:p:t:m:j:h" opt; do
+  while getopts ":w:p:t:m:o:j:h" opt; do
     case "${opt}" in
       w)
         wallclock="${OPTARG}"
@@ -126,20 +129,23 @@ function SBATCH_HEADER {
       m)
         mem="${OPTARG}"
         ;;
+      o)
+        output="${OPTARG}"
+        ;;
       j)
         jobname="${OPTARG}"
         ;;
       h)
-        echo "Call with: sbatch_header [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-j bash]" 1>&2
+        echo $errmsg 1>&2
         return 0
         ;;
       :)
         echo "Invalid option: $OPTARG requires an argument" 1>&2
-        echo "Call with: sbatch_header [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-j bash]" 1>&2
+        echo $errmsg 1>&2
         return 1
         ;;
       *)
-        echo "Call with: sbatch_header [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-j bash]" 1>&2
+        echo $errmsg 1>&2
         return 1
         ;;
     esac
@@ -154,6 +160,7 @@ cat <<EOF
 #SBATCH --ntasks=${threads}
 #SBATCH --partition=${partition}
 #SBATCH --mem=${mem}
+#SBATCH --output=${output}
 #SBATCH -J ${jobname}
 
 EOF
