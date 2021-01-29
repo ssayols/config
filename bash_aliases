@@ -1,12 +1,12 @@
 # Servers
-alias hpc='ssh -Y hpclogin.imb.uni-mainz.de'
+alias hpc='ssh -Y hpclogin'
 alias hpc1='ssh -Y hpc1'
 alias hpc2='ssh -Y hpc2'
 alias hpc3='ssh -Y hpc3'
 alias hpcgpu='ssh -Y hpcgpu'
 alias mogon='ssh -Y say@mil01.zdv.uni-mainz.de'
 alias mogon2='ssh -Y say@miil01.zdv.uni-mainz.de'
-alias rstudio_hpc='ssh -NL 8787:127.0.0.1:8787 ssayolsp@hpcgpu.imb.uni-mainz.de & sleep 2; echo "remember to kill the background job to remove the tunnel!"; firefox http://127.0.0.1:8787'
+alias rstudio_hpc='ssh -NL 8787:127.0.0.1:8787 say@hpcgpu.imb.uni-mainz.de & sleep 2; echo "remember to kill the background job to remove the tunnel!"; firefox http://127.0.0.1:8787'
 
 # Dirs
 alias projects='cd /fsimb/groups/imb-bioinfocf/projects'
