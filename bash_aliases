@@ -163,6 +163,18 @@ cat <<EOF
 #SBATCH --output=${output}
 #SBATCH -J ${jobname}
 
+set -Eeuo pipefail
+
+trap 'catch \$? \$LINENO' ERR
+
+catch() {
+  curl -LX POST -d "{\"username\": \"${jobname}\", \"channel\": \"@sergisayolspuig\", \"text\": \"Error \$1 occurred on \$2 \"}" tinyurl.com/rwv7nxnv
+}
+
+# your script starts here
+
+curl -LX POST -d "{\"username\": \"${jobname}\", \"channel\": \"@sergisayolspuig\", \"text\": \"Finished succesfully\"}" tinyurl.com/rwv7nxnv
+
 EOF
 }
 
