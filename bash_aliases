@@ -161,7 +161,7 @@ cat <<EOF
 #SBATCH --partition=${partition}
 #SBATCH --mem=${mem}
 #SBATCH --output=${output}
-#SBATCH -J ${jobname}
+#SBATCH --job-name=${jobname}
 
 set -Eeuo pipefail
 
