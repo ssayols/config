@@ -154,9 +154,11 @@ function! R_bindings()
   let g:R_esc_term = 0
   " this 2 for some reason seem to be used before set here and need to be
   " changed in common_global.vim directly (or better unmaps + mapped again)
+  if g:R_assign == 1 && g:R_assign_map == "_"
+    iunmap <buffer> _
+  endif
   let g:R_assign = 1
   let g:R_assign_map = "<M-,>"
-  iunmap <buffer> _
   call RCreateEditMaps()
   vmap <Space> <Esc>:call SendSelectionToR("echo", "down")<CR>
   nmap <Space> :call SendLineToR("down")<CR>0
@@ -205,4 +207,18 @@ let g:lightline = {
 map <C-o> :NERDTreeToggle<CR>
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"syntastic (linter)
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" 
+" let g:syntastic_enable_r_lintr_checker = 1
+" let g:syntastic_r_checkers = ['lintr']
+" let g:syntastic_quiet_messages = { "type": "style" }
 
