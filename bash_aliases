@@ -20,6 +20,9 @@ alias view='vim'
 alias dropbox='~/bin/dropbox/dropbox.py'
 alias browsh='singularity exec ~/bin/browsh.simg /app/browsh'
 
+# Fun
+alias weather='curl wttr.in'
+
 # fix screen's DISPLAY var
 function RESCREEN {
 #	screen -S $1 -X setenv DISPLAY $DISPLAY
