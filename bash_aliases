@@ -20,6 +20,9 @@ alias view='vim'
 alias dropbox='~/bin/dropbox/dropbox.py'
 alias browsh='singularity exec ~/bin/browsh.simg /app/browsh'
 
+# Fun
+alias weather='curl wttr.in'
+
 # fix screen's DISPLAY var
 function RESCREEN {
 #	screen -S $1 -X setenv DISPLAY $DISPLAY
@@ -56,47 +59,53 @@ function HPC_NODE {
   
   local OPTIND opt wallclock partition threads mem jobname
 
-  wallclock=7-0
+  time=7-0
   partition=bcflong
-  threads=4
-  mem=1G
+  cpus=4
+  mem=16G
+  node=hpc1
   jobname=bash
 
-  while getopts ":w:p:t:m:j:h" opt; do
+  errmsg="Call with: hpc_node [-t <7-0>] [-p <bcflong>] [-c <4>] [-m <1G>] [-w hpc1] [-j bash]"
+
+  while getopts ":t:p:c:m:w:j:h" opt; do
     case "${opt}" in
-      w)
-        wallclock="${OPTARG}"
+      t)
+        time="${OPTARG}"
         ;;
       p)
         partition="${OPTARG}"
         ;;
-      t)
-        threads="${OPTARG}"
+      c)
+        cpus="${OPTARG}"
         ;;
       m)
         mem="${OPTARG}"
+        ;;
+      w)
+        node="${OPTARG}"
         ;;
       j)
         jobname="${OPTARG}"
         ;;
       h)
-        echo "Call with: hpc_node [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-j bash]" 1>&2
+        echo $errmsg 1>&2
         return 0
         ;;
       :)
         echo "Invalid option: $OPTARG requires an argument" 1>&2
-        echo "Call with: hpc_node [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-j bash]" 1>&2
+        echo $errmsg 1>&2
         return 1
         ;;
       *)
-        echo "Call with: hpc_node [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-j bash]" 1>&2
+        echo $errmsg 1>&2
         return 1
         ;;
     esac
   done
   shift $((OPTIND-1))
 
-  srun --pty --time=$wallclock --partition=$partition --ntasks=$threads --nodes=1 --mem=$mem -J ${jobname} bash
+  srun --pty --time=$time --partition=$partition -c $cpus --nodes=1 --mem=$mem -w $node -J ${jobname} bash
 }
 
 alias hpc_node=HPC_NODE
@@ -106,25 +115,25 @@ function SBATCH_HEADER {
 
   local OPTIND opt wallclock partition threads mem output jobname errmsg
 
-  wallclock=1:00:00
-  partition=bcflong
-  threads=4
-  mem=1G
+  time=1:00:00
+  partition=bcfshort
+  cpus=4
+  mem=16G
   output=slurm_job.out
   jobname=bash
-  
-  errmsg="Call with: sbatch_header [-w <7-0>] [-p <bcflong>] [-t <4>] [-m <1G>] [-o slurm_job.out] [-j bash]"
+
+  errmsg="Call with: sbatch_header [-t <7-0>] [-p <bcflong>] [-c <4>] [-m <1G>] [-o slurm_job.out] [-j bash]"
 
   while getopts ":w:p:t:m:o:j:h" opt; do
     case "${opt}" in
-      w)
-        wallclock="${OPTARG}"
+      t)
+        time="${OPTARG}"
         ;;
       p)
         partition="${OPTARG}"
         ;;
-      t)
-        threads="${OPTARG}"
+      c)
+        cpus="${OPTARG}"
         ;;
       m)
         mem="${OPTARG}"
@@ -155,9 +164,9 @@ function SBATCH_HEADER {
 cat <<EOF
 #!/bin/bash
 
-#SBATCH --time=${wallclock}
+#SBATCH --time=${time}
 #SBATCH --nodes=1
-#SBATCH --ntasks=${threads}
+#SBATCH --cpus-per-task=${cpus}
 #SBATCH --partition=${partition}
 #SBATCH --mem=${mem}
 #SBATCH --output=${output}
