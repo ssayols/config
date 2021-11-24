@@ -22,11 +22,14 @@ set $mod Mod4
 ##
 ## Startup programs and keybindings
 ##
+# Rstudio docker container
+#exec --no-startup-id podman run --name rstudio -v /home/sergi:/home/sergi -e PASSWORD='  ' -p 8787:8787 rocker/rstudio
+
 # Skype, dropbox, slack and teams
 #exec --no-startup-id skype
 exec --no-startup-id dropbox start -i
 exec --no-startup-id slack --startup
-assign [class="Microsoft Teams - Preview"] 8
+assign [class="Microsoft Teams - Preview"] 9
 #for_window [class="Microsoft Teams - Preview"] floating enable
 exec --no-startup-id teams
 
@@ -284,7 +287,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
   status_command i3status
-  position          top
+  position bottom
 
   colors {
     background #2f343f
