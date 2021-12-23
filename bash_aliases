@@ -189,7 +189,7 @@ EOF
 
 alias sbatch_header=SBATCH_HEADER
 
-# DF manipulation
+# PDF manipulation
 function PDF2PNG {
   gs -dNOPAUSE -dBATCH -sDEVICE=pngalpha -r144 -sOutputFile="${1%.pdf}-%d.png" $1
 }
@@ -199,3 +199,22 @@ function MERGEPDF {
   gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=out.pdf $@
 }
 alias mergepdf=MERGEPDF
+
+
+# R spin template
+R_SPIN_TEMPLATE() {
+  cat <<EOF
+#' ---
+#' title: "Title"
+#' output:
+#'   BiocStyle::html_document:
+#'     code_folding: hide
+#' ---
+#' 
+#' # Intro
+#' We're doing some beautiful plots
+plot(1:10)
+EOF
+}
+alias R_spin=R_SPIN_TEMPLATE
+
