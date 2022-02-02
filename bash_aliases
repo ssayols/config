@@ -20,6 +20,9 @@ alias view='vim'
 alias dropbox='~/bin/dropbox/dropbox.py'
 alias browsh='singularity exec ~/bin/browsh.simg /app/browsh'
 
+# Fun
+alias weather='curl wttr.in'
+
 # fix screen's DISPLAY var
 function RESCREEN {
 #	screen -S $1 -X setenv DISPLAY $DISPLAY
@@ -196,3 +199,33 @@ function MERGEPDF {
   gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=out.pdf $@
 }
 alias mergepdf=MERGEPDF
+
+# R spin template
+R_SPIN_TEMPLATE() {
+  cat <<EOF
+#' ---
+#' title: "Title"
+#' output:
+#'   BiocStyle::html_document:
+#'     code_folding: hide
+#' ---
+#' 
+#' # Intro
+#' Preamble
+library(ggplot2)
+library(plotly)
+library(DT)
+library(htmltools)
+library(knitr)
+
+PROJECT <- "/fsimb/groups/imb-bioinfocf/projects/beli/imb_beli_2022_01_meta_splicing_AQR/"
+CORES <- 8
+
+setwd(PROJECT)
+knitr::opts_knit$set(root.dir=PROJECT)
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+options(mc.cores=CORES)
+EOF
+}
+alias R_spin=R_SPIN_TEMPLATE
+
