@@ -5,12 +5,6 @@ options(menu.graphics=FALSE)
 options(Ncpus=min(parallel::detectCores(), getOption("Ncpus", 4L)))
 options(mc.cores=min(parallel::detectCores(), getOption("Ncpus", 4L)))
 
-# change repos (add BioC + non-secure server for Germany)
-source("http://bioconductor.org/biocLite.R")
-x=biocinstallRepos()
-x["CRAN"]="http://cran.uni-muenster.de/"
-options(repos=x)
-
 # settings for interactive prompts
 if(interactive()) {
   options(vimcom.verbose=1)         # vim-r-plugin verbose mode
@@ -18,7 +12,7 @@ if(interactive()) {
   options(width=132)                # wide display with multiple monitors
   options(editor="vim")
   options(prompt="R> ")
-  options(continue="  ")
+#  options(continue="  ")
 
   # colorize R output with the colorout package
   if(grepl("256color", Sys.getenv("TERM")) && require(colorout)) {
@@ -31,3 +25,7 @@ if(interactive()) {
     palette("Classic Tableau")  # show palette colors with scales::show_col(palette())
   }
 }
+
+# Some old versions of biomaRt may raise an error when using an Ensembl mirror if main site is irresponsive.
+# See: https://github.com/grimbough/biomaRt/issues/31
+setHook(packageEvent("biomaRt", "attach"), function(...) { httr::set_config(httr::config(ssl_verifypeer = FALSE)) })
