@@ -189,7 +189,7 @@ EOF
 
 alias sbatch_header=SBATCH_HEADER
 
-# DF manipulation
+# PDF manipulation
 function PDF2PNG {
   gs -dNOPAUSE -dBATCH -sDEVICE=pngalpha -r144 -sOutputFile="${1%.pdf}-%d.png" $1
 }
