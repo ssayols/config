@@ -222,8 +222,8 @@ PROJECT <- "/fsimb/groups/imb-bioinfocf/projects/beli/imb_beli_2022_01_meta_spli
 CORES <- 8
 
 setwd(PROJECT)
-knitr::opts_knit$set(root.dir=PROJECT)
-knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+knitr::opts_knit\$set(root.dir=PROJECT)
+knitr::opts_chunk\$set(message=FALSE, warning=FALSE)
 options(mc.cores=CORES)
 EOF
 }
