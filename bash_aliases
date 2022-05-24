@@ -196,7 +196,9 @@ function PDF2PNG {
 alias pdf2png=PDF2PNG
 
 function MERGEPDF {
-  gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=out.pdf $@
+  i=$(($# - 1))
+  j=$#
+  gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=${@:$i+1:$j} ${@:1:$i}
 }
 alias mergepdf=MERGEPDF
 
