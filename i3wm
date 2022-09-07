@@ -49,22 +49,23 @@ exec --no-startup-id volumeicon
 exec --no-startup-id gpaste-client
 
 # exchange Esc-Caps keys
-exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
+exec --no-startup-id "sleep 2; xmodmap ~/.config/i3/mapEscToCaps"
 
 # open Neovim with a shortcut
 bindsym $mod+Shift+Return exec xterm -title "Neovim - i3" -geometry 80x24 -fa 'Monospace' -fs 11 -e nvim
 for_window [title="Neovim - i3" class="XTerm"] floating enable
 
 # open ranger or nautilus with a shortcut
-bindsym $mod+n exec gnome-terminal --title="ranger" -x ranger
+#bindsym $mod+n exec gnome-terminal --title="ranger" -x ranger
 bindsym $mod+e exec "nautilus --no-desktop&"
 for_window [class="Nautilus"] floating enable
 for_window [class="Gnome-calculator"] floating enable
 
 # take screenshot (full desktop, current window, selection
-bindsym --release Print exec scrot -e 'mv $f ~/Pictures'
-bindsym --release Shift+Print exec scrot -ue 'mv $f ~/Pictures'
-bindsym --release $mod+Print exec scrot -se 'mv $f ~/Pictures'
+#bindsym --release Print exec scrot -e 'mv $f ~/Pictures'
+#bindsym --release Shift+Print exec scrot -ue 'mv $f ~/Pictures'
+#bindsym --release $mod+Print exec scrot -se 'mv $f ~/Pictures'
+bindsym --release Print exec --no-startup-id maim --capturebackground --hidecursor --select "~/Pictures/$(date --iso-8601=seconds).png"
 
 # control audio keys (with alsa or pulseaudio <-- the latter preferred)
 #bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
