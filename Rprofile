@@ -21,11 +21,18 @@ if(interactive()) {
   }
   # instead of the normal cairo device, for faster plotting over the network
   if(require(grDevices)) {
-    X11.options("type"="nbcairo")
-    palette("Classic Tableau")  # show palette colors with scales::show_col(palette())
+    X11.options("type"="nbcairo")  # requires compression in ssh (-C)
+    palette("Classic Tableau")     # show palette colors with scales::show_col(palette())
   }
 }
 
 # Some old versions of biomaRt may raise an error when using an Ensembl mirror if main site is irresponsive.
 # See: https://github.com/grimbough/biomaRt/issues/31
 setHook(packageEvent("biomaRt", "attach"), function(...) { httr::set_config(httr::config(ssl_verifypeer = FALSE)) })
+
+# change default theme in ggplot2
+setHook(packageEvent("ggplot2", "attach"), function(...) {
+  ggplot2::theme_set(ggplot2::theme_bw())        # use theme_bw as default
+  options(ggplot2.continuous.colour="viridis")   # use viridis for continuous colors
+  options(ggplot2.continuous.fill = "viridis")
+})
