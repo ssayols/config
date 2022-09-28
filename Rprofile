@@ -5,6 +5,8 @@ options(menu.graphics=FALSE)
 options(Ncpus=min(parallel::detectCores(), getOption("Ncpus", 4L)))
 options(mc.cores=min(parallel::detectCores(), getOption("Ncpus", 4L)))
 
+grDevices::palette("Tableau")     # show palette colors with scales::show_col(palette())
+
 # settings for interactive prompts
 if(interactive()) {
   options(vimcom.verbose=1)         # vim-r-plugin verbose mode
@@ -21,8 +23,7 @@ if(interactive()) {
   }
   # instead of the normal cairo device, for faster plotting over the network
   if(require(grDevices)) {
-    X11.options("type"="nbcairo")  # requires compression in ssh (-C)
-    palette("Classic Tableau")     # show palette colors with scales::show_col(palette())
+    X11.options("type"="dbcairo")  # requires compression in ssh (-C)
   }
 }
 
