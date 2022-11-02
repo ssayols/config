@@ -1,0 +1,2 @@
+sshfs#ssayolsp@hpc1.imb.uni-mainz.de:/fsimb /fsimb     fuse      IdentityFile=/home/sergi/.ssh/id_ed25519_sk,user,_netdev,noauto,reconnect,uid=1000,gid=1000,idmap=user,allow_other  0   0
+https://webdav.uni-mainz.de/ /mnt/imb davfs _netdev,noauto,user,uid=1000,gid=1000 0 0
