@@ -99,7 +99,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 bindsym --release Mod1+Escape exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
 
 # enable/disable screens: $mod+F1 --> force laptop; $mod+F2 --> run screenlayout.sh again
-bindsym --release $mod+F1 exec --no-startup-id "for display in $(xrandr | grep -e '\bconnected\b' | cut -f1 -d ' ' | grep -v eDP1); do xrandr --output $display --off; done; xrandr --output eDP1 --auto"
+bindsym --release $mod+F1 exec --no-startup-id "for display in $(xrandr | grep -e '\bconnected\b' | cut -f1 -d ' ' | grep -v eDP-1); do xrandr --output $display --off; done; xrandr --output eDP-1 --auto"
 bindsym --release $mod+F2 exec --no-startup-id ~/.config/i3/screenlayout.sh
 
 # system menu
