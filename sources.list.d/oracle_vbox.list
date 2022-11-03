@@ -1,1 +1,0 @@
-deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox.gpg] https://download.virtualbox.org/virtualbox/debian jammy contrib
