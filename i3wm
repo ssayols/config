@@ -25,6 +25,12 @@ set $mod Mod4
 # Rstudio docker container
 #exec --no-startup-id podman run --name rstudio -v /home/sergi:/home/sergi -e PASSWORD='  ' -p 8787:8787 rocker/rstudio
 
+# touchpad config
+# view devices and device settings with `xinput && xinput list-props "ALP0018:00 044E:121B Touchpad"`
+exec xinput set-prop "ALP0018:00 044E:121B Touchpad" "libinput Tapping Enabled" 1
+exec xinput set-prop "ALP0018:00 044E:121B Touchpad" "libinput Natural Scrolling" 1
+exec xinput set-prop "ALP0018:00 044E:121B Touchpad" "libinput Middle Emulation" 1
+
 # Skype, dropbox, slack and teams
 #exec --no-startup-id skype
 #exec --no-startup-id dropbox start -i
