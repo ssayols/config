@@ -17,7 +17,7 @@ if(interactive()) {
 #  options(continue="  ")
 
   # colorize R output with the colorout package
-  if(grepl("256color", Sys.getenv("TERM")) && require(colorout)) {
+  if(grepl("256color", Sys.getenv("TERM")) && require(colorout, quietly=TRUE)) {
     setOutputColors256(normal=40, number=214, string=85, const=35, stderr=45,
                        error=c(1, 0, 1), warn=c(1, 0, 100), verbose=FALSE)
   }
@@ -37,3 +37,8 @@ setHook(packageEvent("ggplot2", "attach"), function(...) {
   options(ggplot2.continuous.colour="viridis")   # use viridis for continuous colors
   options(ggplot2.continuous.fill = "viridis")
 })
+
+# OpenAI env variable with auth token
+# Required to run James H. Wade's GPTtools (https://github.com/JamesHWade/gpttools)
+Sys.setenv(OPENAI_API_KEY = "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")
+
