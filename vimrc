@@ -32,6 +32,8 @@ if !has('nvim')
 else
     set mouse=""
 endif
+"compara el buffer actual amb l'ultima versio guardada del fitxer
+command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
 "colors (set color scheme, highlight current line, highlight columns 80 and 120)
 if &term =~ "xterm" || &term =~ "256" || $DISPLAY != "" || $HAS_256_COLORS == "yes"
