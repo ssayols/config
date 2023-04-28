@@ -205,8 +205,14 @@ let g:lightline = {
   \ }
 
 "nerdtree plugin (https://github.com/scrooloose/nerdtree)
-"open NERDTree
-map <C-o> :NERDTreeToggle<CR>
+let NERDTreeShowBookmarks=1
+"let NERDTreeIgnore=['\\.swo$', '\\.swp$', '\\.git']
+"let NERDTreeChDirMode=0
+"let NERDTreeQuitOnOpen=1
+"let NERDTreeShowHidden=1
+"let NERDTreeKeepTreeInNewTab=1
+noremap <C-o> :NERDTreeToggle<CR>
+noremap <leader>nt :NERDTreeFind<CR>
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
