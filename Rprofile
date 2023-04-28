@@ -40,5 +40,8 @@ setHook(packageEvent("ggplot2", "attach"), function(...) {
 
 # OpenAI env variable with auth token
 # Required to run James H. Wade's GPTtools (https://github.com/JamesHWade/gpttools)
-Sys.setenv(OPENAI_API_KEY = "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")
+Sys.setenv(OPENAI_API_KEY = "my-beautiful-key")
+
+# in knitr documents, generate both the PNG and SVG version
+knitr::opts_chunk$set(dev=c("png", "svg"))
 
