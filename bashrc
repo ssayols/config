@@ -54,6 +54,7 @@ alias l='ls -CF'
 alias rm='rm -I --one-file-system'
 
 # Change the TERM environment variable (to get 256 colors)
+export COLORTERM=truecolor
 if [ "x$DISPLAY" != "x" ]; then
     export HAS_256_COLORS=yes
     if [ "$TERM" = "xterm" ]; then
