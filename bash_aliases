@@ -21,7 +21,6 @@ alias htop='htop -u say'
 alias sjob='scontrol show job'
 alias sacct='sacct --format="JobID,JobName,Partition,Account,AllocCPUS,CPUTime,MaxRSS,State,ExitCode"'
 alias view='vim'
-alias dropbox='~/bin/dropbox/dropbox.py'
 alias browsh='singularity exec ~/bin/browsh.simg /app/browsh'
 
 # Fun
