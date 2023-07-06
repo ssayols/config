@@ -1,9 +1,13 @@
 # Servers
 alias hpc='ssh -YC hpclogin'
 alias hpc1='ssh -YC hpc1'
+#alias hpc1='hpc_node -w hpc1'
 alias hpc2='ssh -YC hpc2'
+#alias hpc2='hpc_node -w hpc2'
 alias hpc3='ssh -YC hpc3'
+#alias hpc3='hpc_node -w hpc3'
 alias hpcgpu='ssh -YC hpcgpu'
+#alias hpcgpu='hpc_node -w hpcgpu'
 alias mogon='ssh -Y say@mil01.zdv.uni-mainz.de'
 alias mogon2='ssh -Y say@miil01.zdv.uni-mainz.de'
 alias rstudio_hpc='ssh -NL 8787:127.0.0.1:8787 say@hpcgpu.imb.uni-mainz.de & sleep 2; echo "remember to kill the background job to remove the tunnel!"; firefox http://127.0.0.1:8787'
@@ -59,14 +63,14 @@ function HPC_NODE {
   
   local OPTIND opt wallclock partition threads mem jobname
 
-  time=7-0
+  time=1-0
   partition=bcflong
-  cpus=4
+  cpus=1
   mem=16G
   node=hpc1
   jobname=bash
 
-  errmsg="Call with: hpc_node [-t <7-0>] [-p <bcflong>] [-c <4>] [-m <1G>] [-w hpc1] [-j bash]"
+  errmsg="Call with: hpc_node [-t <1-0>] [-p <bcflong>] [-c <1>] [-m <16G>] [-w hpc1] [-j bash]"
 
   while getopts ":t:p:c:m:w:j:h" opt; do
     case "${opt}" in
@@ -105,7 +109,7 @@ function HPC_NODE {
   done
   shift $((OPTIND-1))
 
-  srun --pty --time=$time --partition=$partition -c $cpus --nodes=1 --mem=$mem -w $node -J ${jobname} bash
+  srun --pty --x11 --time=$time --partition=$partition -c $cpus --nodes=1 --mem=$mem -w $node -J ${jobname} bash
 }
 
 alias hpc_node=HPC_NODE
@@ -117,12 +121,12 @@ function SBATCH_HEADER {
 
   time=1:00:00
   partition=bcfshort
-  cpus=4
+  cpus=1
   mem=16G
   output=slurm_job.out
   jobname=bash
 
-  errmsg="Call with: sbatch_header [-t <7-0>] [-p <bcflong>] [-c <4>] [-m <1G>] [-o slurm_job.out] [-j bash]"
+  errmsg="Call with: sbatch_header [-t <1:00:00>] [-p <bcfshort>] [-c <1>] [-m <16G>] [-o slurm_job.out] [-j bash]"
 
   while getopts ":w:p:t:m:o:j:h" opt; do
     case "${opt}" in
