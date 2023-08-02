@@ -216,6 +216,7 @@ R_SPIN_TEMPLATE() {
 #' 
 #' # Intro
 #' Preamble
+knitr::opts_chunk\$set(message=FALSE, warning=FALSE)
 library(ggplot2)
 library(plotly)
 library(DT)
@@ -235,7 +236,6 @@ CORES <- 8
 
 setwd(PROJECT)
 knitr::opts_knit\$set(root.dir=PROJECT)
-knitr::opts_chunk\$set(message=FALSE, warning=FALSE)
 options(mc.cores=CORES)
 EOF
 }
