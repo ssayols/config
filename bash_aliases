@@ -208,8 +208,10 @@ R_SPIN_TEMPLATE() {
 #' ---
 #' title: "Title"
 #' output:
-#'   BiocStyle::html_document:
+#'   html_document:
+#'     toc: true
 #'     code_folding: hide
+#'     theme: paper
 #' ---
 #' 
 #' # Intro
@@ -220,6 +222,14 @@ library(DT)
 library(htmltools)
 library(knitr)
 
+DT_OPTIONS <- list(pageLength  =10,
+                   paging      =TRUE,
+                   searching   =TRUE,
+                   fixedColumns=TRUE,
+                   autoWidth   =TRUE,
+                   ordering    =TRUE,
+                   dom         ="tB",
+                   buttons     =c("copy", "csv", "excel"))
 PROJECT <- "/fsimb/groups/imb-bioinfocf/projects/beli/imb_beli_2022_01_meta_splicing_AQR/"
 CORES <- 8
 
@@ -230,4 +240,3 @@ options(mc.cores=CORES)
 EOF
 }
 alias R_spin=R_SPIN_TEMPLATE
-
