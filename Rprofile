@@ -43,5 +43,4 @@ setHook(packageEvent("ggplot2", "attach"), function(...) {
 Sys.setenv(OPENAI_API_KEY = "my-beautiful-key")
 
 # in knitr documents, generate both the PNG and SVG version
-knitr::opts_chunk$set(dev=c("png", "svg"))
-
+setHook(packageEvent("knitr", "attach"), function(...) { knitr::opts_chunk$set(dev=c("png", "svg")) })
