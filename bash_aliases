@@ -1,6 +1,6 @@
 # Servers
-alias hpc='ssh -YC hpclogin'
-alias hpc1='ssh -YC hpc1'
+alias hpc='ssh -L 8787:127.0.0.1:8787 -YC hpclogin'
+alias hpc1='ssh -L 8787:127.0.0.1:8787 -YC hpc1'
 #alias hpc1='hpc_node -w hpc1'
 #alias hpc2='hpc_node -w hpc2'
 #alias hpc3='hpc_node -w hpc3'
