@@ -30,6 +30,7 @@ if(interactive()) {
   # open httpgd graphics devices over http (Rstudio-like functionality to have a GD in a browser)
   library(httpgd)
   options(httpgd.port=8787)   # default to 8787 port, which should be redirected with `ssh -L`
+  options(httpgd.token=FALSE) # default to no security token
 }
 
 # Some old versions of biomaRt may raise an error when using an Ensembl mirror if main site is irresponsive.
