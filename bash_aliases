@@ -223,15 +223,15 @@ library(DT)
 library(htmltools)
 library(knitr)
 
-DT_OPTIONS <- list(pageLength  =10,
+DT_OPTIONS <- list(pageLength  =5,      # and then call `DT::datatable(x, extensions="Buttons", options=DT_OPTIONS)`
                    paging      =TRUE,
                    searching   =TRUE,
                    fixedColumns=TRUE,
                    autoWidth   =TRUE,
                    ordering    =TRUE,
-                   dom         ="tB",
+                   dom         ="Blfrtip",
                    buttons     =c("copy", "csv", "excel"))
-PROJECT <- "/fsimb/groups/imb-bioinfocf/projects/beli/imb_beli_2022_01_meta_splicing_AQR/"
+PROJECT <- "/project/folder"
 CORES <- 8
 
 setwd(PROJECT)
