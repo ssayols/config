@@ -57,6 +57,13 @@ exec --no-startup-id volumeicon
 
 # exchange Esc-Caps keys
 exec --no-startup-id "sleep 2; xmodmap ~/.config/i3/mapEscToCaps"
+# setup US and ES keyboard layouts
+exec "setxkbmap -layout us,es"
+# set esc to caps again
+bindsym --release Mod1+Escape exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
+# switch keyboard layout with Alt+Scape
+bindsym Mod1+space exec ~/.config/i3/changeKbdLayout.sh
+exec "setxkbmap -option 'grp:alt_shift_toggle'"
 
 # open Neovim with a shortcut
 bindsym $mod+Shift+Return exec xterm -title "Neovim - i3" -geometry 80x24 -fa 'Monospace' -fs 11 -e nvim
@@ -101,9 +108,6 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 #EndSection
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
-
-# set esc to caps again
-bindsym --release Mod1+Escape exec --no-startup-id "sleep 1; xmodmap ~/.config/i3/mapEscToCaps"
 
 # enable/disable screens: $mod+F1 --> force laptop; $mod+F2 --> run screenlayout.sh again
 bindsym --release $mod+F1 exec --no-startup-id "for display in $(xrandr | grep -e '\bconnected\b' | cut -f1 -d ' ' | grep -v eDP-1); do xrandr --output $display --off; done; xrandr --output eDP-1 --auto"
@@ -294,7 +298,8 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
-  status_command i3status
+  #status_command i3status
+  status_command ~/.config/i3status/i3status.sh
   position bottom
 
   colors {
