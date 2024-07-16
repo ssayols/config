@@ -3,7 +3,7 @@
 i3status --config ~/.config/i3status/config | while :
 do
   read line
-  LG=$(setxkbmap -query | awk '/layout/{print $2}') 
-  dat="[{ \"full_text\": \"LANG: $LG\", \"color\":\"#FFFFFF\" },"
+  x=$(setxkbmap -query | awk '/layout/{print $2}') 
+  dat="[{ \"full_text\": \"layout: $x\", \"color\":\"#FFFFFF\" },"
   echo "${line/[/$dat}" || exit 1
 done
