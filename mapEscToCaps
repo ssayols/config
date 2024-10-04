@@ -1,5 +1,6 @@
 ! To be run as: $ xmodmap mapEscToCaps
 ! Restore with: $ setxkbmap -layout us
+! NOTE: an additional strategy using kernel mappings (works in Wayland+XOrg) is explained at the end
 
 ! Swap caps lock and escape
 ! remove Lock = Caps_Lock
@@ -15,3 +16,13 @@ keycode 0x5e = Super_L Super_L Super_L Super_L
 clear mod1
 keycode 0x6c = Super_L NoSymbol Super_L NoSymbol
 add Mod1 = Alt_L Meta_L
+
+! Additional strategy
+! -------------------
+! Edit /etc/udev/hwdb.d/99-ibm-modelM.hwdb
+! and include the following 2 lines to map '<>' to Win
+!   evdev:name:Barcode Reader:*
+!    KEYBOARD_KEY_70064=leftmeta
+! obtain the "hex scan code (70064)" and the key name (leftmeta) with `sudo evtest`
+! Then, restart the systemd service with `sudo systemd-hwdb update && sudo udevadm trigger`
+! This is nicely explained here: https://www.reddit.com/r/linux_gaming/comments/nypsi1/updated_guide_to_remapping_keys_on_linux_using/
