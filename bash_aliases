@@ -223,7 +223,7 @@ library(DT)
 library(htmltools)
 library(knitr)
 
-DT_OPTIONS <- list(pageLength  =5,      # and then call `DT::datatable(x, extensions="Buttons", options=DT_OPTIONS)`
+DT_OPTIONS <- list(pageLength  =5,      # and then call \`DT::datatable(x, extensions="Buttons", options=DT_OPTIONS)\`
                    paging      =TRUE,
                    searching   =TRUE,
                    fixedColumns=TRUE,
